@@ -17,7 +17,7 @@ public class ReciboNomina{
         this.porcentajeImpuesto = 0.16f; // 16% de impuesto
     }
 
-    public float calcularPagoBase() {
+    public float calcularPagoBase(){
         float pagoBase = 200;
         switch (puesto) {
             case 1:
