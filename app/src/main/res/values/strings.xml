@@ -2,4 +2,7 @@
     <string name="app_name">preexamenc1</string>
     <string name="ex">Cálculo de pago de nomina</string>
     <string name="name">Trabajador</string>
+    <string name="yo">Carol Vazquez Garcia</string>
+    <string name="grup"> TCI 9-2</string>
+    <string name="mat">2021030075</string>
 </resources>
