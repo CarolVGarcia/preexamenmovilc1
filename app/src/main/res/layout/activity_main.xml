@@ -46,20 +46,18 @@
 
         </TextView>
 
-        <EditText
-            android:id="@+id/txtNombre"
+        <TextView
+            android:id="@+id/txtombreTrabajador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/lblNombreLabel"
-            android:hint="Nombre" >
+            android:hint="Nombre">
 
-        </EditText>
+        </TextView>
 
         <TextView
             android:id="@+id/lblHorasNormalesLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtNombre"
             android:text="Horas Trabajadas" >
 
         </TextView>
@@ -169,8 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/btnLimpiar"
-                android:text="Salir"
-                android:gravity=""/>
+                android:text="Salir" />
 
         </LinearLayout>
 
