@@ -38,21 +38,16 @@
         </TextView>
 
         <TextView
-            android:id="@+id/lblNombreLabel"
+            android:id="@+id/txtombreTrabajador"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre del Trabajador: ">
-
-
-        </TextView>
-
-        <TextView
-            android:id="@+id/txtombreTrabajador"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nombre">
+            android:text="Nombre del Trabajador: "
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold">
 
         </TextView>
+
 
         <TextView
             android:id="@+id/lblHorasNormalesLabel"

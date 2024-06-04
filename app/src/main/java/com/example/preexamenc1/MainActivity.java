@@ -8,12 +8,14 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText etNombre, etHorasNormales, etHorasExtras;
+    private EditText  etHorasNormales, etHorasExtras;
     private RadioButton rbAuxiliar, rbAlbanil, rbIngObra;
     private Button btnCalcular, btnLimpiar, btnSalir;
-    private TextView tvSubtotal, tvImpuesto, tvTotalPagar, tvNumRecibo;
+    private TextView  tvNombreTrabajador, tvSubtotal, tvImpuesto, tvTotalPagar, tvNumRecibo;
     private Random random = new Random();
 
     @Override
@@ -21,8 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Inicialización de los elementos de la UI
-        etNombre = findViewById(R.id.txtNombre);
+        tvNombreTrabajador = findViewById(R.id.txtombreTrabajador);
         etHorasNormales = findViewById(R.id.txtHorasNormales);
         etHorasExtras = findViewById(R.id.txtHorasExtras);
         rbAuxiliar = findViewById(R.id.rdbAuxiliar);
@@ -39,10 +40,15 @@ public class MainActivity extends AppCompatActivity {
         int numRecibo = random.nextInt(999999);
         tvNumRecibo.setText(String.format("Número de Recibo: %06d", numRecibo));
 
+        String nombreTrabajador = getIntent().getStringExtra("nombreTrabajador");
+        tvNombreTrabajador.setText(String.format("Nombre del Trabajador: %s", nombreTrabajador));
+
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.getDefault());
+
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                calcularNomina();
+                calcularNomina(currencyFormat);
             }
         });
 
@@ -62,8 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void calcularNomina() {
-        String nombre = etNombre.getText().toString();
+    private void calcularNomina(NumberFormat currencyFormat) {
         float horasNormales = Float.parseFloat(etHorasNormales.getText().toString());
         float horasExtras = Float.parseFloat(etHorasExtras.getText().toString());
         int puesto = obtenerPuesto();
@@ -72,9 +77,9 @@ public class MainActivity extends AppCompatActivity {
         float impuesto = subtotal * 0.16f; // 16% de impuesto
         float totalPagar = subtotal - impuesto;
 
-        tvSubtotal.setText(String.format("Subtotal: %.2f", subtotal));
-        tvImpuesto.setText(String.format("Impuesto: %.2f", impuesto));
-        tvTotalPagar.setText(String.format("Total a Pagar: %.2f", totalPagar));
+        tvSubtotal.setText(String.format("Subtotal: %s", currencyFormat.format(subtotal)));
+        tvImpuesto.setText(String.format("Impuesto: %s", currencyFormat.format(impuesto)));
+        tvTotalPagar.setText(String.format("Total a Pagar: %s", currencyFormat.format(totalPagar)));
     }
 
     private int obtenerPuesto() {
@@ -99,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void limpiarCampos() {
-        etNombre.setText("");
         etHorasNormales.setText("");
         etHorasExtras.setText("");
         rbAuxiliar.setChecked(false);
