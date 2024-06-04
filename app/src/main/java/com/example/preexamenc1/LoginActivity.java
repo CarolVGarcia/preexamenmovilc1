@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Cierra la aplicación o vuelve a la pantalla anterior
+
                 finish();
             }
         });

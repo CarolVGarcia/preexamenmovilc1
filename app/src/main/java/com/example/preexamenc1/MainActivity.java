@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Random;
 import java.text.NumberFormat;
 import java.util.Locale;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
     private EditText  etHorasNormales, etHorasExtras;
@@ -62,19 +64,32 @@ public class MainActivity extends AppCompatActivity {
         btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Cierra la aplicación
+                finish();
             }
         });
 
     }
 
+
     private void calcularNomina(NumberFormat currencyFormat) {
+
+        if (etHorasNormales.getText().toString().isEmpty() || etHorasExtras.getText().toString().isEmpty()) {
+            // Mostrar un mensaje de advertencia
+            Toast.makeText(MainActivity.this, "Por favor, complete todos los campos.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!rbAuxiliar.isChecked() && !rbAlbanil.isChecked() && !rbIngObra.isChecked()) {
+            Toast.makeText(MainActivity.this, "Por favor, seleccione un puesto.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
         float horasNormales = Float.parseFloat(etHorasNormales.getText().toString());
         float horasExtras = Float.parseFloat(etHorasExtras.getText().toString());
         int puesto = obtenerPuesto();
         float pagoBase = calcularPagoBase(puesto);
         float subtotal = (pagoBase * horasNormales) + (horasExtras * pagoBase * 2);
-        float impuesto = subtotal * 0.16f; // 16% de impuesto
+        float impuesto = subtotal * 0.16f;
         float totalPagar = subtotal - impuesto;
 
         tvSubtotal.setText(String.format("Subtotal: %s", currencyFormat.format(subtotal)));
@@ -86,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         if (rbAuxiliar.isChecked()) return 1;
         if (rbAlbanil.isChecked()) return 2;
         if (rbIngObra.isChecked()) return 3;
-        return 0; // Valor por defecto si no se selecciona ningún puesto
+        return 0;
     }
 
     private float calcularPagoBase(int puesto) {
