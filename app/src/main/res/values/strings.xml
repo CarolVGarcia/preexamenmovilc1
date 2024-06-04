@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">preexamenc1</string>
+    <string name="ex">Cálculo de pago de nomina</string>
+    <string name="name">Trabajador</string>
 </resources>
